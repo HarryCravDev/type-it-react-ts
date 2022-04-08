@@ -3,30 +3,38 @@ import { getWords } from "../../context/TypeItAction";
 import TypeItContext from "../../context/TypeItContext";
 
 const DisplayWord: React.FC = () => {
-	const { words, loading, dispatch } = useContext(TypeItContext);
+	const { word, words, gameOver, loading, dispatch } = useContext(TypeItContext);
 
 	useEffect(() => {
 		dispatch({ type: "SET_LOADING" });
-		console.log({ words, loading });
 
 		const data = getWords();
 		dispatch({ type: "GET_WORDS", data });
-		console.log({ words, loading });
+
+		dispatch({
+			type: "GET_WORD",
+			word: data[Math.floor(Math.random() * data.length)],
+		});
 	}, []);
 
 	return (
 		<div>
-			{words ? (
+			{
+				!gameOver ? 
 				<div>
-					{words.map((word: string, index: number) => (
-						<h1 key={index}>{word}</h1>
-					))}
+					<h1 className="p-3 text-5xl font-bold">{word}</h1>
 				</div>
-			) : (
+				:
 				<div>
-					<h1>No words..</h1>
+					<h1 className="p-3 text-5xl font-bold text-primary-content">Game Over</h1>
 				</div>
-			)}
+			}
+			{
+				!words && 
+				<div>
+					<h1 className="p-3 text-5xl font-bold">No words...</h1>
+				</div>
+			}
 		</div>
 	);
 };
