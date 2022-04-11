@@ -2,33 +2,29 @@ import React, { useContext, useEffect, useState } from "react";
 import TypeItContext from "../../context/TypeItContext";
 
 function GameControls() {
-	const { score, gameOver, resetTime, time, pause, loading, dispatch } =
+	const { score, gameOver, inGame, resetTime, time, pause, loading, dispatch } =
 		useContext(TypeItContext);
-	const [emoji, setEmoji] = useState(String.fromCodePoint(128526));
-	
-	useEffect(() => {
+	const [emoji, setEmoji] = useState<string>(String.fromCodePoint(128526));
 
-		if(score === 0){
+	useEffect(() => {
+		if (score === 0) {
 			setEmoji(String.fromCodePoint(129300));
 		}
 
-		if(score > 5){
+		if (score > 5) {
 			setEmoji(String.fromCodePoint(128293));
 		}
 
-		if(score > 10){
+		if (score > 10) {
 			setEmoji(String.fromCodePoint(129321));
 		}
 
-		if(score > 15){
+		if (score > 15) {
 			setEmoji(String.fromCodePoint(128125));
 		}
-
 	}, [gameOver]);
 
 	const changeDifficulty = (difficulty: number) => {
-		// Todo - Run function to change game time by difficulty
-		console.log(difficulty);
 		dispatch({
 			type: "CHANGE_DIFFICULTY",
 			time: difficulty,
@@ -37,19 +33,19 @@ function GameControls() {
 	};
 
 	const resetGame = () => {
-		dispatch({ type: "RESET_GAME", time, score: 0, resetTime: !resetTime });
+		dispatch({ type: "RESET_GAME", time, score: 0, resetTime: true });
 	};
 
 	const pauseGame = () => {
 		dispatch({ type: "PAUSE", pause: !pause });
-		console.log("Pause game...");
 	};
-
 
 	return (
 		<div>
-			<h1 className="my-2">Score: {score} { gameOver && <span>{emoji}</span>}</h1>
-			{gameOver || pause ? (
+			<h1 className="my-2">
+				Score: {score} {gameOver && <span>{emoji}</span>}
+			</h1>
+			{!inGame ? (
 				<div>
 					<button
 						onClick={() => changeDifficulty(7)}
