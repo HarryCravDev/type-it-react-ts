@@ -3,12 +3,20 @@ import TypeItContext from "../../context/TypeItContext";
 
 function WordInput() {
 	const [text, setText] = useState<string>("");
-	const { word, words, score, resetTime, time, gameOver, pause, dispatch } =
-		useContext(TypeItContext);
+	const {
+		word,
+		words,
+		score,
+		inGame,
+		resetTime,
+		time,
+		gameOver,
+		pause,
+		dispatch,
+	} = useContext(TypeItContext);
 
 	const checkAnswer = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log("Check answer: ", gameOver);
-		if (pause) {
+		if (pause || !inGame) {
 			dispatch({ type: "START_GAME" });
 		}
 
