@@ -8,4 +8,5 @@ export interface WordState {
 	resetTime: boolean;
 	pause: boolean;
 	timerChange: boolean;
+	inGame: boolean;
 }
