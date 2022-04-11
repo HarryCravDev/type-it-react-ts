@@ -1,4 +1,4 @@
-export const getWords = () => {
+export const getWords = (): string[] => {
 	const words = [
 		"hat",
 		"river",
