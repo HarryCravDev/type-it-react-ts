@@ -14,16 +14,10 @@ export const initialState: WordState = {
 	pause: true,
 	loading: false,
 	timerChange: false,
+	inGame: false,
 };
 
 export const TypeItProvider = ({ children }: { children: any }) => {
-	// const initialState: WordState = {
-	// 	words: [],
-	// 	word: "",
-	// 	score: 0,
-	// 	loading: false,
-	// };
-
 	const [state, dispatch] = useReducer(typeItReducer, initialState);
 
 	return (
