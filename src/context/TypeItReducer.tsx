@@ -1,21 +1,7 @@
-import { time } from "console";
+import { IAction } from "../types/IAction";
 import { WordState } from "../types/IWordState";
 import { initialState } from "./TypeItContext";
-const typeItReducer = (
-	// state: WordState = { words: [], word: "", score: 0, loading: false },
-	state: WordState = initialState,
-	action: {
-		type: string;
-		data: string[];
-		word: string;
-		score: number;
-		time: number;
-		resetTime: boolean;
-		pause: boolean;
-		timerChange: boolean;
-	}
-) => {
-	console.log("Reducer: ", { state, action });
+const typeItReducer = (state: WordState = initialState, action: IAction) => {
 	switch (action.type) {
 		case "GET_WORDS":
 			return {
@@ -42,6 +28,7 @@ const typeItReducer = (
 			return {
 				...state,
 				gameOver: true,
+				inGame: false,
 			};
 		case "START_GAME":
 			return {
@@ -49,6 +36,7 @@ const typeItReducer = (
 				gameOver: false,
 				pause: false,
 				resetTime: action.resetTime,
+				inGame: true,
 			};
 		case "RESET_GAME":
 			return {
