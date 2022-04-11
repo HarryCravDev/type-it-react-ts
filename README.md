@@ -1,3 +1,8 @@
+# TODO list
+
+- Get words from a public API.
+- Add get new words button which requests new works from an API.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
